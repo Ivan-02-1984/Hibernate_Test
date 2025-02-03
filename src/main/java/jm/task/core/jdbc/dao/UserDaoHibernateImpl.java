@@ -4,6 +4,7 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class UserDaoHibernateImpl implements UserDao {
         } catch (Exception e) {
             sessionFactory.getCurrentSession().getTransaction().rollback();
         }
+        System.out.println("User с именем - " + name + " добавлен в базу данных");
     }
 
     @Override
@@ -71,6 +73,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.getTransaction().commit();
         } catch (Exception e) {
             sessionFactory.getCurrentSession().getTransaction().rollback();
+        }
+        for (User user : users) {
+            System.out.println(user);
         }
         return users;
 
